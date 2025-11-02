@@ -1,0 +1,152 @@
+2025-11-01 19:32:59,483 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 19:32:59,483 - ERROR -  Error durante la generación: 'DataGenerator' object has no attribute 'generate_vehicles'
+2025-11-01 19:41:55,450 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 19:41:55,450 - ERROR -  Error durante la generación: 'DataGenerator' object has no attribute 'generate_vehicles'
+2025-11-01 20:28:59,979 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 20:28:59,979 - WARNING - Iniciando truncado de tablas (CASCADE)...
+2025-11-01 20:29:00,160 - INFO - Tablas truncadas y contadores reiniciados.
+2025-11-01 20:29:00,161 - INFO - Generando 200 vehículos...
+2025-11-01 20:29:00,200 - INFO -  200 vehículos insertados
+2025-11-01 20:29:00,200 - INFO - Generando 400 conductores...
+2025-11-01 20:29:00,263 - ERROR -  Error fatal durante la generación: no existe la columna «license_type» en la relación «drivers»
+LINE 3:                                license_number, license_type,...
+                                                       ^
+
+2025-11-01 20:29:00,263 - INFO - Rollback de transacción realizado.
+2025-11-01 20:29:00,265 - INFO - 
+ Conexión cerrada
+2025-11-01 20:37:18,360 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 20:37:18,360 - WARNING - Iniciando truncado de tablas (CASCADE)...
+2025-11-01 20:37:18,493 - INFO - Tablas truncadas y contadores reiniciados.
+2025-11-01 20:37:18,493 - INFO - Generando 200 vehículos...
+2025-11-01 20:37:18,527 - INFO -  200 vehículos insertados
+2025-11-01 20:37:18,528 - INFO - Generando 400 conductores...
+2025-11-01 20:37:18,582 - ERROR -  Error fatal durante la generación: no existe la columna «license_type» en la relación «drivers»
+LINE 3:                                license_number, license_type,...
+                                                       ^
+
+2025-11-01 20:37:18,582 - INFO - Rollback de transacción realizado.
+2025-11-01 20:37:18,582 - INFO - 
+ Conexión cerrada
+2025-11-01 20:47:31,045 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 20:47:31,045 - WARNING - Iniciando truncado de tablas (CASCADE)...
+2025-11-01 20:47:31,174 - INFO - Tablas truncadas y contadores reiniciados.
+2025-11-01 20:47:31,174 - INFO - Generando 200 vehículos...
+2025-11-01 20:47:31,209 - INFO -  200 vehículos insertados
+2025-11-01 20:47:31,209 - INFO - Generando 400 conductores...
+2025-11-01 20:47:31,301 - INFO -  400 conductores insertados
+2025-11-01 20:47:31,301 - INFO - Generando 50 rutas...
+2025-11-01 20:47:31,310 - INFO -  50 rutas insertadas
+2025-11-01 20:47:31,310 - INFO - Generando 100000 viajes...
+2025-11-01 20:47:33,185 - INFO -   Progreso: 10000/100000 trips insertados
+2025-11-01 20:47:34,980 - INFO -   Progreso: 20000/100000 trips insertados
+2025-11-01 20:47:36,755 - INFO -   Progreso: 30000/100000 trips insertados
+2025-11-01 20:47:38,523 - INFO -   Progreso: 40000/100000 trips insertados
+2025-11-01 20:47:40,307 - INFO -   Progreso: 50000/100000 trips insertados
+2025-11-01 20:47:42,113 - INFO -   Progreso: 60000/100000 trips insertados
+2025-11-01 20:47:43,968 - INFO -   Progreso: 70000/100000 trips insertados
+2025-11-01 20:47:45,831 - INFO -   Progreso: 80000/100000 trips insertados
+2025-11-01 20:47:47,716 - INFO -   Progreso: 90000/100000 trips insertados
+2025-11-01 20:47:49,816 - INFO -   Progreso: 100000/100000 trips insertados
+2025-11-01 20:47:49,816 - INFO -  100000 viajes insertados
+2025-11-01 20:47:49,816 - INFO - Generando 400000 entregas...
+2025-11-01 20:47:50,392 - ERROR -  Error fatal durante la generación: no existe el esquema «np»
+LINE 5: ...utaro Perez', 'Diagonal Belgrano N° 71, Cordoba', np.float64...
+                                                             ^
+
+2025-11-01 20:47:50,392 - INFO - Rollback de transacción realizado.
+2025-11-01 20:47:50,407 - INFO - 
+ Conexión cerrada
+2025-11-01 20:58:25,409 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 20:58:25,409 - WARNING - Iniciando truncado de tablas (CASCADE)...
+2025-11-01 20:58:25,543 - INFO - Tablas truncadas y contadores reiniciados.
+2025-11-01 20:58:25,543 - INFO - Generando 200 vehículos...
+2025-11-01 20:58:25,582 - INFO -  200 vehículos insertados
+2025-11-01 20:58:25,582 - INFO - Generando 400 conductores...
+2025-11-01 20:58:25,676 - INFO -  400 conductores insertados
+2025-11-01 20:58:25,676 - INFO - Generando 50 rutas...
+2025-11-01 20:58:25,676 - INFO -  50 rutas insertadas
+2025-11-01 20:58:25,676 - INFO - Generando 100000 viajes...
+2025-11-01 20:58:27,610 - INFO -   Progreso: 10000/100000 trips insertados
+2025-11-01 20:58:29,371 - INFO -   Progreso: 20000/100000 trips insertados
+2025-11-01 20:58:31,130 - INFO -   Progreso: 30000/100000 trips insertados
+2025-11-01 20:58:32,887 - INFO -   Progreso: 40000/100000 trips insertados
+2025-11-01 20:58:34,597 - INFO -   Progreso: 50000/100000 trips insertados
+2025-11-01 20:58:36,371 - INFO -   Progreso: 60000/100000 trips insertados
+2025-11-01 20:58:38,103 - INFO -   Progreso: 70000/100000 trips insertados
+2025-11-01 20:58:39,935 - INFO -   Progreso: 80000/100000 trips insertados
+2025-11-01 20:58:41,724 - INFO -   Progreso: 90000/100000 trips insertados
+2025-11-01 20:58:43,546 - INFO -   Progreso: 100000/100000 trips insertados
+2025-11-01 20:58:43,546 - INFO -  100000 viajes insertados
+2025-11-01 20:58:43,546 - INFO - Generando 400000 entregas...
+2025-11-01 20:58:56,115 - INFO -   Progreso: 50000/400000 deliveries insertados
+2025-11-01 20:59:08,369 - INFO -   Progreso: 100000/400000 deliveries insertados
+2025-11-01 20:59:20,764 - INFO -   Progreso: 150000/400000 deliveries insertados
+2025-11-01 20:59:32,943 - INFO -   Progreso: 200000/400000 deliveries insertados
+2025-11-01 20:59:44,938 - INFO -   Progreso: 250000/400000 deliveries insertados
+2025-11-01 20:59:57,620 - INFO -   Progreso: 300000/400000 deliveries insertados
+2025-11-01 21:00:10,182 - INFO -   Progreso: 350000/400000 deliveries insertados
+2025-11-01 21:00:22,523 - INFO -   Progreso: 400000/400000 deliveries insertados
+2025-11-01 21:00:22,524 - INFO -  400000 entregas insertadas
+2025-11-01 21:00:22,538 - INFO - Generando 5000 registros de mantenimiento...
+2025-11-01 21:00:22,599 - ERROR -  Error fatal durante la generación: 'datetime.date' object has no attribute 'date'
+2025-11-01 21:00:22,599 - INFO - Rollback de transacción realizado.
+2025-11-01 21:00:22,599 - INFO - 
+ Conexión cerrada
+2025-11-01 21:09:13,163 - INFO -  Conexión exitosa a PostgreSQL
+2025-11-01 21:09:13,165 - WARNING - Iniciando truncado de tablas (CASCADE)...
+2025-11-01 21:09:13,347 - INFO - Tablas truncadas y contadores reiniciados.
+2025-11-01 21:09:13,347 - INFO - Generando 200 vehículos...
+2025-11-01 21:09:13,379 - INFO -  200 vehículos insertados
+2025-11-01 21:09:13,379 - INFO - Generando 400 conductores...
+2025-11-01 21:09:13,457 - INFO -  400 conductores insertados
+2025-11-01 21:09:13,457 - INFO - Generando 50 rutas...
+2025-11-01 21:09:13,474 - INFO -  50 rutas insertadas
+2025-11-01 21:09:13,474 - INFO - Generando 100000 viajes...
+2025-11-01 21:09:15,332 - INFO -   Progreso: 10000/100000 trips insertados
+2025-11-01 21:09:17,177 - INFO -   Progreso: 20000/100000 trips insertados
+2025-11-01 21:09:19,029 - INFO -   Progreso: 30000/100000 trips insertados
+2025-11-01 21:09:20,898 - INFO -   Progreso: 40000/100000 trips insertados
+2025-11-01 21:09:22,728 - INFO -   Progreso: 50000/100000 trips insertados
+2025-11-01 21:09:24,610 - INFO -   Progreso: 60000/100000 trips insertados
+2025-11-01 21:09:26,448 - INFO -   Progreso: 70000/100000 trips insertados
+2025-11-01 21:09:28,250 - INFO -   Progreso: 80000/100000 trips insertados
+2025-11-01 21:09:30,087 - INFO -   Progreso: 90000/100000 trips insertados
+2025-11-01 21:09:31,855 - INFO -   Progreso: 100000/100000 trips insertados
+2025-11-01 21:09:31,855 - INFO -  100000 viajes insertados
+2025-11-01 21:09:31,855 - INFO - Generando 400000 entregas...
+2025-11-01 21:09:44,301 - INFO -   Progreso: 50000/400000 deliveries insertados
+2025-11-01 21:09:56,647 - INFO -   Progreso: 100000/400000 deliveries insertados
+2025-11-01 21:10:08,861 - INFO -   Progreso: 150000/400000 deliveries insertados
+2025-11-01 21:10:20,920 - INFO -   Progreso: 200000/400000 deliveries insertados
+2025-11-01 21:10:33,292 - INFO -   Progreso: 250000/400000 deliveries insertados
+2025-11-01 21:10:45,265 - INFO -   Progreso: 300000/400000 deliveries insertados
+2025-11-01 21:10:57,544 - INFO -   Progreso: 350000/400000 deliveries insertados
+2025-11-01 21:11:09,807 - INFO -   Progreso: 400000/400000 deliveries insertados
+2025-11-01 21:11:09,807 - INFO -  400000 entregas insertadas
+2025-11-01 21:11:09,823 - INFO - Generando 5000 registros de mantenimiento...
+2025-11-01 21:11:10,710 - INFO -  4939 mantenimientos insertados
+2025-11-01 21:11:10,710 - INFO - 
+ RESUMEN DE GENERACIÓN DE DATOS
+2025-11-01 21:11:10,710 - INFO - ==================================================
+2025-11-01 21:11:10,710 - INFO -   vehicles: 200 registros
+2025-11-01 21:11:10,710 - INFO -   drivers: 400 registros
+2025-11-01 21:11:10,710 - INFO -   routes: 48 registros
+2025-11-01 21:11:10,731 - INFO -   trips: 100,000 registros
+2025-11-01 21:11:10,825 - INFO -   deliveries: 400,000 registros
+2025-11-01 21:11:10,826 - INFO -   maintenance: 4,939 registros
+2025-11-01 21:11:10,827 - INFO - 
+  TOTAL: 505,587 registros
+2025-11-01 21:11:10,959 - INFO - 
+  Entregas por viaje: AVG=4.0, MIN=1, MAX=6
+2025-11-01 21:11:10,959 - INFO - 
+ VALIDANDO CALIDAD DE DATOS...
+2025-11-01 21:11:10,975 - INFO -    [OK] Integridad referencial - Trips sin vehículo válido: OK
+2025-11-01 21:11:11,086 - INFO -    [OK] Integridad referencial - Deliveries sin trip válido: OK
+2025-11-01 21:11:11,099 - INFO -    [OK] Consistencia temporal - Trips con arrival < departure: OK
+2025-11-01 21:11:11,130 - INFO -    [OK] Consistencia de peso - Trips excediendo capacidad: OK
+2025-11-01 21:11:11,131 - INFO -    [OK] Entregas sin tracking number: OK
+2025-11-01 21:11:11,132 - INFO - 
+ Resumen guardado en generation_summary.json
+2025-11-01 21:11:11,132 - INFO - 
+ Conexión cerrada
