@@ -5,7 +5,6 @@ Genera 505000+ registros respetando relaciones y reglas de negocio
 
 import psycopg2
 from psycopg2.extras import execute_batch
-# NOTA: Se eliminó 'pandas' y 'sqlalchemy' que no eran necesarios o generaban inconsistencia
 import numpy as np
 from faker import Faker
 from datetime import datetime, timedelta
@@ -92,7 +91,7 @@ class DataGenerator:
 
     # ---------- GENERACIÓN DE DATOS ----------
     
-    # MEJORA 2: Usar 'self.counters' como valor por defecto
+    
     def generate_vehicles(self):
         """Generar vehículos con diferentes tipos y capacidades"""
         count = self.counters['vehicles'] # Usar el contador de la clase
@@ -131,7 +130,7 @@ class DataGenerator:
          
         execute_batch(self.cursor, query, vehicles, page_size=100)
         self.connection.commit()
-        # self.counters['vehicles'] = count # Ya no es necesario, se lee de ahí
+        
         logging.info(f" {count} vehículos insertados")
     
     def generate_drivers(self):
@@ -176,6 +175,8 @@ class DataGenerator:
         self.connection.commit()
         logging.info(f" {count} conductores insertados")
     
+
+        # ---------- RUTAS ----------
     def generate_routes(self):
         """Generar rutas entre las 5 ciudades principales"""
         count = self.counters['routes'] # Usar el contador de la clase
@@ -218,12 +219,15 @@ class DataGenerator:
         
         routes = routes[:count]
         
-        query = """ INSERT INTO routes (route_code, origin_city, destination_city, distance_km, estimated_duration_hours, toll_cost) VALUES (%s, %s, %s, %s, %s, %s)"""
+        query = """ INSERT INTO routes (route_code, origin_city, destination_city, 
+        distance_km, estimated_duration_hours, toll_cost) 
+        VALUES (%s, %s, %s, %s, %s, %s)"""
         
         execute_batch(self.cursor, query, routes, page_size=50)
         self.connection.commit()
         logging.info(f" {count} rutas insertadas")
-    
+        
+        
     def _get_distance(self, origin, destination):
         """Obtener distancia aproximada entre ciudades Argentinas""" 
         distances = {
@@ -242,6 +246,8 @@ class DataGenerator:
         key = tuple(sorted([origin, destination]))
         return distances.get(key, 500)
     
+
+    # ---------- VIAJES ----------
     def generate_trips(self):
         """Generar viajes en 2 años de operación (Eficiente en memoria)"""
         count = self.counters['trips'] # Usar el contador de la clase
@@ -257,7 +263,7 @@ class DataGenerator:
         
         start_date = datetime.now() - timedelta(days=730)
         
-        # MEJORA : Patrón de generación e inserción por lotes
+        
         trips_batch = [] # Lote temporal
         batch_size = 1000 # Tamaño del lote a insertar
         current_date = start_date
@@ -305,7 +311,7 @@ class DataGenerator:
                 status
             ))
             
-            current_date += timedelta(minutes=int(1440 * 2 * 365 / count))
+            current_date += timedelta(minutes=(1440 * 2 * 365 / count))
             
             # Insertar el lote cuando esté lleno
             if len(trips_batch) >= batch_size:
@@ -445,6 +451,8 @@ class DataGenerator:
         weights = np.maximum(weights, 0.5)
         return weights
     
+    
+    # ---------- MANTENIMIENTO ----------
     def generate_maintenance(self):
         """Generar registros de mantenimiento"""
         count = self.counters['maintenance']
@@ -476,24 +484,23 @@ class DataGenerator:
 
         for vehicle_id, vehicle_type, trip_count, first_trip, last_trip in vehicle_stats:
             
-            # --- INICIO DE LA CORRECCIÓN ---
             first_trip_date = None
             last_trip_date = None
 
             if trip_count == 0 or not first_trip or not last_trip:
-                # Caso B: El vehículo no tiene viajes, usamos la fecha de adquisición
+                
                 self.cursor.execute("SELECT acquisition_date FROM vehicles WHERE vehicle_id = %s", (vehicle_id,))
                 first_trip_date = self.cursor.fetchone()[0] # Ya es un objeto .date
                 last_trip_date = datetime.now().date()      # Ya es un objeto .date
                 trip_count = 1
             else:
-                # Caso A: El vehículo tiene viajes, extraemos el .date() del datetime
+              
                 first_trip_date = first_trip.date()
                 last_trip_date = last_trip.date()
             
-            # Ahora 'last_trip_date' y 'first_trip_date' son siempre objetos .date
+            
             operation_days = (last_trip_date - first_trip_date).days
-            # --- FIN DE LA CORRECCIÓN ---
+            
 
             if operation_days <= 0:
                 operation_days = 1
@@ -503,8 +510,6 @@ class DataGenerator:
             for i in range(min(num_maintenance, count - len(maintenance_records))):
                 days_offset = int(operation_days * (i + 1) / (num_maintenance + 1))
                 
-                # --- CORRECCIÓN ADICIONAL ---
-                # Usamos 'first_trip_date' que ya es un objeto .date
                 maintenance_date = (first_trip_date + timedelta(days=days_offset))
                 
                 maint_type, base_cost, days_next = random.choice(maintenance_types)
@@ -540,6 +545,8 @@ class DataGenerator:
         self.counters['maintenance'] = min(len(maintenance_records), count)
         logging.info(f" {self.counters['maintenance']} mantenimientos insertados")
     
+    
+    # ---------- VALIDACIÓN Y REPORTE ----------
     def validate_data_quality(self):
         """Validar integridad y calidad de datos"""
         logging.info("\n VALIDANDO CALIDAD DE DATOS...")
@@ -583,6 +590,8 @@ class DataGenerator:
         
         return all_valid
     
+    
+    # ---------- REPORTE RESUMEN ----------
     def generate_summary_report(self):
         """Generar reporte resumen de datos generados"""
         logging.info("\n RESUMEN DE GENERACIÓN DE DATOS")
@@ -591,8 +600,8 @@ class DataGenerator:
         tables = ['vehicles', 'drivers', 'routes', 'trips', 'deliveries', 'maintenance']
         total_records = 0
         
-        # Usar los contadores de la clase para el reporte JSON
-        # Pero verificar la BD para el log
+        
+        # Verificar la BD para el log
         final_counts = {}
         
         for table in tables:
@@ -634,6 +643,8 @@ class DataGenerator:
         
         logging.info("\n Resumen guardado en generation_summary.json")
     
+    
+    # ---------- CIERRE DE CONEXIÓN ----------
     def close(self):
         """Cerrar conexión"""
         if self.cursor:
@@ -642,7 +653,7 @@ class DataGenerator:
             self.connection.close()
         logging.info("\n Conexión cerrada")
 
-
+    # ---------- FUNCIÓN PRINCIPAL ----------
 def main():
     """Función principal"""
     print(" FLEETLOGIX - Generación de Datos Masivos")
@@ -656,10 +667,10 @@ def main():
         if not generator.connect():
             return
         
-        # MEJORA 6: Llamar a truncate_tables
+        # Truncar tablas antes de generar nuevos datos
         generator.truncate_tables()
         
-        # MEJORA 7: Llamar a los métodos sin parámetros
+        
         # Generar datos en orden (respetando foreign keys)
         generator.generate_vehicles()
         generator.generate_drivers()
@@ -683,6 +694,8 @@ def main():
     finally:
         generator.close()
 
+        
+# Ejecutar la función principal
 
 if __name__ == "__main__":
     main()
