@@ -30,7 +30,7 @@ DB_CONFIG = {
     'host': 'localhost',
     'database': 'FLEETLOGIX DATABASE',
     'user': 'postgres',
-    'password': 'alikavelero',  # Cambiar por tu contraseña
+    'password': 'alikavelero',  
     'port': 5432
 }
 
@@ -86,15 +86,15 @@ class DataGenerator:
         
         except Exception as e:
             logging.error(f"Error en truncado: {e}")
-            self.connection.rollback() # Usar el rollback de la clase
-            sys.exit(1) # Salir si no podemos truncar
+            self.connection.rollback() 
+            sys.exit(1) 
 
     # ---------- GENERACIÓN DE DATOS ----------
     
     
     def generate_vehicles(self):
         """Generar vehículos con diferentes tipos y capacidades"""
-        count = self.counters['vehicles'] # Usar el contador de la clase
+        count = self.counters['vehicles'] 
         logging.info(f"Generando {count} vehículos...")
         
         vehicle_types = [
@@ -135,7 +135,7 @@ class DataGenerator:
     
     def generate_drivers(self):
         """Generar conductores con datos realistas"""
-        count = self.counters['drivers'] # Usar el contador de la clase
+        count = self.counters['drivers'] 
         logging.info(f"Generando {count} conductores...")
         
         drivers = []
@@ -177,9 +177,10 @@ class DataGenerator:
     
 
         # ---------- RUTAS ----------
+
     def generate_routes(self):
         """Generar rutas entre las 5 ciudades principales"""
-        count = self.counters['routes'] # Usar el contador de la clase
+        count = self.counters['routes'] 
         logging.info(f"Generando {count} rutas...")
         
         routes = []
@@ -247,10 +248,11 @@ class DataGenerator:
         return distances.get(key, 500)
     
 
-    # ---------- VIAJES ----------
+    # ---------- VIAJES ---------
+
     def generate_trips(self):
         """Generar viajes en 2 años de operación (Eficiente en memoria)"""
-        count = self.counters['trips'] # Usar el contador de la clase
+        count = self.counters['trips'] 
         logging.info(f"Generando {count} viajes...")
         
         # Obtener IDs válidos
@@ -264,8 +266,8 @@ class DataGenerator:
         start_date = datetime.now() - timedelta(days=730)
         
         
-        trips_batch = [] # Lote temporal
-        batch_size = 1000 # Tamaño del lote a insertar
+        trips_batch = [] 
+        batch_size = 1000 
         current_date = start_date
         
         query = """
@@ -313,7 +315,7 @@ class DataGenerator:
             
             current_date += timedelta(minutes=(1440 * 2 * 365 / count))
             
-            # Insertar el lote cuando esté lleno
+            
             if len(trips_batch) >= batch_size:
                 execute_batch(self.cursor, query, trips_batch, page_size=batch_size)
                 self.connection.commit()
@@ -322,7 +324,7 @@ class DataGenerator:
                 if (i + 1) % 10000 == 0:
                     logging.info(f"  Progreso: {i+1}/{count} trips insertados")
         
-        # Insertar el lote restante
+        
         if trips_batch:
             execute_batch(self.cursor, query, trips_batch, page_size=len(trips_batch))
             self.connection.commit()
@@ -340,7 +342,7 @@ class DataGenerator:
     
     def generate_deliveries(self):
         """Generar entregas (promedio 4 por viaje) (Eficiente en memoria)"""
-        count = self.counters['deliveries'] # Usar el contador de la clase
+        count = self.counters['deliveries'] 
         logging.info(f"Generando {count} entregas...")
         
         # Obtener viajes válidos
@@ -360,7 +362,7 @@ class DataGenerator:
         
         
         deliveries_batch = []
-        batch_size = 1000 # Tamaño del lote de entregas
+        batch_size = 1000 
         delivery_counter = 0
         
         query = """
@@ -373,7 +375,7 @@ class DataGenerator:
         for trip_id, departure, arrival, total_weight, city in tqdm(trips_data, desc="Generando deliveries"):
             num_deliveries = np.random.choice([2, 3, 4, 5, 6], p=[0.1, 0.2, 0.4, 0.2, 0.1])
             
-            # Evitar error si el peso es None o 0
+            
             if not total_weight or total_weight <= 0:
                 continue
                 
@@ -420,7 +422,7 @@ class DataGenerator:
                 
                 delivery_counter += 1
                 
-                # Insertar lote cuando esté lleno
+                
                 if len(deliveries_batch) >= batch_size:
                     execute_batch(self.cursor, query, deliveries_batch, page_size=batch_size)
                     self.connection.commit()
@@ -435,13 +437,13 @@ class DataGenerator:
             if delivery_counter >= count:
                 break
         
-        # Insertar el lote restante
+        
         if deliveries_batch:
             execute_batch(self.cursor, query, deliveries_batch[:(count - delivery_counter + len(deliveries_batch))], page_size=len(deliveries_batch))
             self.connection.commit()
             deliveries_batch.clear()
         
-        self.counters['deliveries'] = delivery_counter # Actualizar con el conteo real
+        self.counters['deliveries'] = delivery_counter 
         logging.info(f" {delivery_counter} entregas insertadas")
     
     def _distribute_weight(self, total_weight, num_packages):
@@ -490,8 +492,8 @@ class DataGenerator:
             if trip_count == 0 or not first_trip or not last_trip:
                 
                 self.cursor.execute("SELECT acquisition_date FROM vehicles WHERE vehicle_id = %s", (vehicle_id,))
-                first_trip_date = self.cursor.fetchone()[0] # Ya es un objeto .date
-                last_trip_date = datetime.now().date()      # Ya es un objeto .date
+                first_trip_date = self.cursor.fetchone()[0] 
+                last_trip_date = datetime.now().date()      
                 trip_count = 1
             else:
               
